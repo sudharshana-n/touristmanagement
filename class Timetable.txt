@@ -1,0 +1,42 @@
+class Timetable:
+    def __init__(self):
+        self.timetable = {}
+    
+    def add_event(self, day, time, event):
+        if day not in self.timetable:
+            self.timetable[day] = {}
+        self.timetable[day][time] = event
+    
+    def get_events(self, day):
+        if day in self.timetable:
+            return self.timetable[day]
+        else:
+            return "No events for this day"
+    
+    def delete_event(self, day, time):
+        if day in self.timetable and time in self.timetable[day]:
+            del self.timetable[day][time]
+        else:
+            print("Event not found")
+    
+    def display_timetable(self):
+        for day in self.timetable:
+            print(day + ":")
+            for time, event in self.timetable[day].items():
+                print("\t", time, " - ", event)
+
+
+# Sample usage
+timetable = Timetable()
+timetable.add_event("Monday", "10:00", "Meeting")
+timetable.add_event("Monday", "14:00", "Lunch")
+timetable.add_event("Tuesday", "12:00", "Workout")
+
+print("Events for Monday:")
+print(timetable.get_events("Monday"))
+
+print("\nDeleting event at 10:00 on Monday:")
+timetable.delete_event("Monday", "10:00")
+
+print("\nUpdated timetable:")
+timetable.display_timetable()
